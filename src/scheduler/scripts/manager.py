@@ -283,7 +283,7 @@ class Scheduler:
 
         # Preprocess to get correct values for the tablet
         self.object_name, self.video_step_url, self.video_full_url = \
-            TabletData.get_data(self.task_number, self.error_step)
+            TabletData.get_data(self.task_number, self.error_step, self.use_location)
 
         # Step ONE:
         # Setup tablet and find the human
@@ -632,7 +632,7 @@ class TabletData(object):
     face_url = "happy-cartoon-face-hi.png"
 
     @staticmethod
-    def get_data(task_number, error_step):
+    def get_data(task_number, error_step, use_location):
         """
         From the task number and error step, get the corresponding object name
         and video urls
@@ -657,7 +657,7 @@ class TabletData(object):
             video_full_url = 'takemedication.all.mp4'
             video_step_url = 'takemedication.error{}.mp4'.format(error_step)
             #Adjust videos since we track new steps
-            if self.use_location:
+            if use_location:
                 if error_step == 3 or error_step == 5: #put_food_cup and put_med
                     video_step_url = '' #no video
                 elif error_step == 4:
@@ -670,9 +670,9 @@ class TabletData(object):
                 object_to_find = 'glass'
             elif error_step == 2:
                 object_to_find = 'sink'
-            elif error_step == (3 if not self.use_location else 4):
+            elif error_step == (3 if not use_location else 4):
                 object_to_find = 'pillbottle'
-            elif error_step == (6 if not self.use_location else 8):
+            elif error_step == (6 if not use_location else 8):
                 object_to_find = 'pills'
 
         elif task_number == Task.WALK_DOG:
