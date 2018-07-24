@@ -13,7 +13,7 @@
 [submodule "src/ras_navigation"]
         path = src/ras_navigation
         url = https://github.com/WSU-RAS/RAS_Navigation.git
-        branch = joule
+        branch = master
 [submodule "src/ras_msgs"]
 	path = src/ras_msgs
 	url = https://github.com/WSU-RAS/ras_msgs.git
